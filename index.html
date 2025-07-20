@@ -3,550 +3,999 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mantenimiento de Equipos de Cómputo - SENA</title>
+    <title>Mantenimiento de Equipos de Cómputo Avanzado</title>
+    <meta name="description" content="Guía completa y recursos interactivos para el mantenimiento preventivo y correctivo de equipos de cómputo. Material educativo para aprendices de formación técnica.">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'tech-blue': '#1e40af',
+                        'tech-gray': '#374151',
+                        'tech-light': '#f8fafc',
+                        'accent-orange': '#f97316',
+                        'hover-bold': '#00008B' // Tono más oscuro para el hover
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
         }
-        .tech-card {
+        .card-hover {
             transition: all 0.3s ease;
-            border-left: 4px solid #3b82f6;
         }
-        .tech-card:hover {
+        .card-hover:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
-        .component-card {
-            transition: all 0.3s ease;
+        .tech-icon {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        .component-card:hover {
-            transform: scale(1.05);
+        /* Estilo para simular interactividad de componentes */
+        .interactive-component:hover {
+            cursor: pointer;
+            box-shadow: 0 0 0 4px #1e40af;
         }
-        .scroll-smooth {
-            scroll-behavior: smooth;
+
+        /* Estilos para títulos y subtítulos con hipervínculo y viñetas */
+        .link-title {
+            display: inline-block; /* Permite aplicar transformaciones */
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
-        .animate-float {
-            animation: float 3s ease-in-out infinite;
+        
+        /* Asegurar que los enlaces dentro de las listas ocupen todo el espacio de la viñeta para el hover */
+        .link-list-item {
+            display: block; /* Ocupa el ancho completo de la viñeta */
+            padding-left: 0.5rem; /* Ajuste visual para el texto de la viñeta */
         }
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+        
+        /* Estilo para los enlaces de herramientas en el div flexbox */
+        .link-tool-item {
+            display: inline-block; /* Ocupa el espacio del texto */
+            font-weight: 500;
+        }
+
+        .link-title:hover {
+            transform: translateY(-3px); /* Efecto flotante */
+            color: #00008B; /* Tono en negrilla (dark navy blue) */
+            border-bottom: 2px solid #ccc; /* Borde más atenuado */
+        }
+        
+        /* Ajustes para enlaces específicos en tarjetas */
+        .card-link-title:hover {
+            border-color: transparent; /* Evita bordes en h3 de las tarjetas si no se desean */
+        }
+
+        /* Estilo para el botón de regreso al inicio */
+        #back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1e40af;
+            color: white;
+            border-radius: 50%;
+            padding: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, opacity 0.5s ease;
+            cursor: pointer;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #back-to-top:hover {
+            background-color: #00008B;
+        }
+
+        #back-to-top.show {
+            opacity: 1;
+            visibility: visible;
         }
     </style>
 </head>
-<body class="bg-gray-50 scroll-smooth">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-lg fixed w-full top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center py-4">
-                <div class="flex items-center space-x-3">
-                    <i class="fas fa-microchip text-2xl text-blue-600"></i>
-                    <span class="text-xl font-bold text-gray-800">TecnoMaintenance</span>
+<body class="bg-tech-light font-sans">
+    <header class="gradient-bg text-white py-16" id="inicio">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-8">
+                <svg class="w-20 h-20 mx-auto mb-4 text-white" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h3l-1 1v1h12v-1l-1-1h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z"/>
+                    <circle cx="12" cy="10" r="2"/>
+                </svg>
+            </div>
+            <h1 class="text-5xl font-bold mb-4">
+                <a href="https://www.google.com" target="_blank" class="link-title text-white">
+                    Mantenimiento de Equipos de Cómputo
+                </a>
+            </h1>
+            <p class="text-xl mb-8 max-w-3xl mx-auto">Aprende las técnicas esenciales para mantener y reparar equipos informáticos. Una guía completa para estudiantes de formación técnica.</p>
+            <div class="bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-4xl mx-auto">
+                <p class="text-lg">El mantenimiento de equipos de cómputo es fundamental en el entorno académico y profesional actual. Dominar estas habilidades te convertirá en un técnico competente y preparado para los desafíos tecnológicos.</p>
+            </div>
+        </div>
+    </header>
+
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-center space-x-8 py-4">
+                <div class="relative group">
+                    <button class="text-tech-gray hover:text-tech-blue font-medium transition-colors flex items-center space-x-1">
+                        <span>Tipos de Mantenimiento</span>
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                    <div class="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                        <div class="py-2">
+                            <a href="#tipos" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">📋 Visión General</a>
+                            <a href="#preventivo" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">✅ Mantenimiento Preventivo</a>
+                            <a href="#correctivo" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">🔧 Mantenimiento Correctivo</a>
+                            <a href="#predictivo" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">📊 Mantenimiento Predictivo</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="hidden md:flex space-x-6">
-                    <a href="#inicio" class="text-gray-600 hover:text-blue-600 transition">Inicio</a>
-                    <a href="#tipos" class="text-gray-600 hover:text-blue-600 transition">Tipos</a>
-                    <a href="#herramientas" class="text-gray-600 hover:text-blue-600 transition">Herramientas</a>
-                    <a href="#componentes" class="text-gray-600 hover:text-blue-600 transition">Componentes</a>
-                    <a href="#diagnostico" class="text-gray-600 hover:text-blue-600 transition">Diagnóstico</a>
-                    <a href="#recursos" class="text-gray-600 hover:text-blue-600 transition">Recursos</a>
+
+                <div class="relative group">
+                    <button class="text-tech-gray hover:text-tech-blue font-medium transition-colors flex items-center space-x-1">
+                        <span>Herramientas</span>
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                    <div class="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                        <div class="py-2">
+                            <a href="#herramientas" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">🔧 Herramientas Básicas</a>
+                            <a href="#procedimientos" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">📋 Procedimientos</a>
+                            <a href="#seguridad" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">⚡ Seguridad Eléctrica</a>
+                            <a href="#limpieza" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">🧹 Técnicas de Limpieza</a>
+                        </div>
+                    </div>
                 </div>
-                <button class="md:hidden text-gray-600" onclick="toggleMenu()">
-                    <i class="fas fa-bars text-xl"></i>
-                </button>
+
+                <div class="relative group">
+                    <button class="text-tech-gray hover:text-tech-blue font-medium transition-colors flex items-center space-x-1">
+                        <span>Componentes</span>
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                    <div class="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                        <div class="py-2">
+                            <a href="#componentes" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">💻 Visión General</a>
+                            <a href="#placa-base" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">🔲 Placa Base</a>
+                            <a href="#procesador" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">🧠 Procesador</a>
+                            <a href="#memoria" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">💾 Memoria RAM</a>
+                            <a href="#almacenamiento" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">💿 Almacenamiento</a>
+                            <a href="#fuente-poder" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">⚡ Fuente de Poder</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <button class="text-tech-gray hover:text-tech-blue font-medium transition-colors flex items-center space-x-1">
+                        <span>Diagnóstico</span>
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                    <div class="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                        <div class="py-2">
+                            <a href="#diagnostico" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">🔍 Métodos de Diagnóstico</a>
+                            <a href="#fallas-comunes" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">❌ Fallas Comunes</a>
+                            <a href="#software-diagnostico" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">💻 Software Especializado</a>
+                            <a href="#bios-uefi" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">⚙️ BIOS/UEFI</a>
+                            <a href="#casos-practicos" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">📚 Casos Prácticos</a>
+                            <a href="#diagnostico" class="block w-full bg-accent-orange text-white px-4 py-2 mt-2 rounded-b-lg font-bold text-sm text-center hover:bg-orange-600 transition-colors">
+                                Explorar Diagnóstico de Fallas
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative group">
+                    <button class="text-tech-gray hover:text-tech-blue font-medium transition-colors flex items-center space-x-1">
+                        <span>Recursos</span>
+                        <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                        </svg>
+                    </button>
+                    <div class="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-xl border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                        <div class="py-2">
+                            <a href="#recursos" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">📚 Biblioteca</a>
+                            <a href="#descargas" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">📄 Descargas</a>
+                            <a href="#videos" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">🎥 Videos Tutoriales</a>
+                            <a href="#enlaces" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">🔗 Enlaces Útiles</a>
+                            <a href="#tendencias" class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-tech-blue transition-colors">🚀 Nuevas Tecnologías</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="inicio" class="gradient-bg text-white pt-20">
-        <div class="max-w-7xl mx-auto px-4 py-20">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div>
-                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
-                        <a href="https://google.com" target="_blank" class="hover:text-blue-200 transition">Mantenimiento de Equipos de Cómputo</a>
-                    </h1>
-                    <p class="text-xl mb-8 opacity-90">
-                        Aprende las técnicas profesionales para mantener equipos informáticos en óptimas condiciones. 
-                        Formación técnica especializada para estudiantes SENA.
-                    </p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button onclick="scrollToSection('tipos')" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
-                            Comenzar Aprendizaje
-                        </button>
-                        <button onclick="downloadPDF()" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition">
-                            <i class="fas fa-download mr-2"></i>Descargar Guía
-                        </button>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <div class="animate-float">
-                        <i class="fas fa-laptop text-8xl md:text-9xl opacity-80"></i>
-                    </div>
-                    <div class="mt-8 grid grid-cols-3 gap-4">
-                        <div class="bg-white bg-opacity-20 p-4 rounded-lg">
-                            <i class="fas fa-tools text-2xl mb-2"></i>
-                            <p class="text-sm">Herramientas</p>
-                        </div>
-                        <div class="bg-white bg-opacity-20 p-4 rounded-lg">
-                            <i class="fas fa-cog text-2xl mb-2"></i>
-                            <p class="text-sm">Procedimientos</p>
-                        </div>
-                        <div class="bg-white bg-opacity-20 p-4 rounded-lg">
-                            <i class="fas fa-chart-line text-2xl mb-2"></i>
-                            <p class="text-sm">Diagnóstico</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Introduction -->
-    <section class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4"><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">¿Qué es el Mantenimiento de Equipos?</a></h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">
-                    El mantenimiento de equipos de cómputo es el conjunto de actividades técnicas que garantizan 
-                    el funcionamiento óptimo, la durabilidad y el rendimiento de los sistemas informáticos.
-                </p>
-            </div>
+    <section id="tipos" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-tech-gray">
+                <a href="https://www.google.com" target="_blank" class="link-title text-tech-gray">
+                    Tipos de Mantenimiento
+                </a>
+            </h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="text-center p-6">
-                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-shield-alt text-2xl text-blue-600"></i>
+                <div id="preventivo" class="card-hover bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-8 border border-green-200">
+                    <div class="text-center mb-6">
+                        <svg class="w-16 h-16 mx-auto text-green-600 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2"><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Prevención</a></h3>
-                    <p class="text-gray-600"><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Evita fallas antes de que ocurran mediante revisiones periódicas</a></p>
+                    <h3 class="text-2xl font-bold mb-4 text-green-700">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-green-700 card-link-title">
+                            Mantenimiento Preventivo
+                        </a>
+                    </h3>
+                    <p class="text-gray-700 mb-4">Acciones programadas para evitar fallas antes de que ocurran.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                • Limpieza regular de componentes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                • Actualización de software
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                • Revisión de conexiones
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                • Monitoreo de temperaturas
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="text-center p-6">
-                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-wrench text-2xl text-green-600"></i>
+
+                <div id="correctivo" class="card-hover bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-8 border border-red-200">
+                    <div class="text-center mb-6">
+                        <svg class="w-16 h-16 mx-auto text-red-600 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2"><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">Corrección</a></h3>
-                    <p class="text-gray-600"><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">Repara y soluciona problemas cuando ya han aparecido</a></p>
+                    <h3 class="text-2xl font-bold mb-4 text-red-700">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-red-700 card-link-title">
+                            Mantenimiento Correctivo
+                        </a>
+                    </h3>
+                    <p class="text-gray-700 mb-4">Reparación de fallas que ya han ocurrido en el sistema.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                • Reemplazo de componentes dañados
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                • Reparación de conexiones
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                • Solución de errores de software
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                • Recuperación de datos
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="text-center p-6">
-                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-chart-bar text-2xl text-purple-600"></i>
+
+                <div id="predictivo" class="card-hover bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl p-8 border border-blue-200">
+                    <div class="text-center mb-6">
+                        <svg class="w-16 h-16 mx-auto text-blue-600 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                        </svg>
                     </div>
-                    <h3 class="text-xl font-semibold mb-2"><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">Predicción</a></h3>
-                    <p class="text-gray-600"><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">Anticipa fallas mediante monitoreo y análisis de datos</a></p>
+                    <h3 class="text-2xl font-bold mb-4 text-blue-700">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-blue-700 card-link-title">
+                            Mantenimiento Predictivo
+                        </a>
+                    </h3>
+                    <p class="text-gray-700 mb-4">Uso de herramientas para predecir posibles fallas futuras.</p>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                • Monitoreo continuo de rendimiento
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                • Análisis de patrones de uso
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                • Software de diagnóstico
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                • Alertas tempranas
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Types of Maintenance -->
-    <section id="tipos" class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12"><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Tipos de Mantenimiento</a></h2>
-            <div class="space-y-8">
-                <!-- Preventivo -->
-                <div class="tech-card bg-white rounded-lg p-8 shadow-lg">
-                    <div class="flex items-start space-x-6">
-                        <div class="bg-blue-100 p-4 rounded-lg">
-                            <i class="fas fa-calendar-check text-3xl text-blue-600"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-4"><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Mantenimiento Preventivo</a></h3>
-                            <p class="text-gray-600 mb-4">
-                                <a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Conjunto de actividades programadas para prevenir fallas y mantener el equipo en condiciones óptimas.</a>
-                            </p>
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <h4 class="font-semibold text-green-600 mb-2"><a href="https://google.com" target="_blank" class="hover:text-green-700 transition">✅ Ventajas:</a></h4>
-                                    <ul class="text-sm text-gray-600 space-y-1">
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">• Reduce costos de reparación</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">• Aumenta la vida útil del equipo</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">• Mejora el rendimiento</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">• Evita pérdida de datos</a></li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-blue-600 mb-2"><a href="https://google.com" target="_blank" class="hover:text-blue-700 transition">🔧 Ejemplos:</a></h4>
-                                    <ul class="text-sm text-gray-600 space-y-1">
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">• Limpieza de ventiladores</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">• Actualización de software</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">• Revisión de conexiones</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">• Desfragmentación de disco</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Correctivo -->
-                <div class="tech-card bg-white rounded-lg p-8 shadow-lg">
-                    <div class="flex items-start space-x-6">
-                        <div class="bg-red-100 p-4 rounded-lg">
-                            <i class="fas fa-tools text-3xl text-red-600"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-4"><a href="https://google.com" target="_blank" class="hover:text-red-600 transition">Mantenimiento Correctivo</a></h3>
-                            <p class="text-gray-600 mb-4">
-                                <a href="https://google.com" target="_blank" class="hover:text-red-600 transition">Reparación de fallas que ya han ocurrido para restaurar el funcionamiento normal del equipo.</a>
-                            </p>
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <h4 class="font-semibold text-orange-600 mb-2"><a href="https://google.com" target="_blank" class="hover:text-orange-700 transition">⚠️ Cuándo aplicar:</a></h4>
-                                    <ul class="text-sm text-gray-600 space-y-1">
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-orange-600 transition">• Equipo no enciende</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-orange-600 transition">• Pantallas azules frecuentes</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-orange-600 transition">• Ruidos extraños</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-orange-600 transition">• Sobrecalentamiento</a></li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-red-600 mb-2"><a href="https://google.com" target="_blank" class="hover:text-red-700 transition">🚨 Fallas comunes:</a></h4>
-                                    <ul class="text-sm text-gray-600 space-y-1">
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-red-600 transition">• Fuente de poder dañada</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-red-600 transition">• Memoria RAM defectuosa</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-red-600 transition">• Disco duro con sectores malos</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-red-600 transition">• Ventiladores bloqueados</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Predictivo -->
-                <div class="tech-card bg-white rounded-lg p-8 shadow-lg">
-                    <div class="flex items-start space-x-6">
-                        <div class="bg-purple-100 p-4 rounded-lg">
-                            <i class="fas fa-chart-line text-3xl text-purple-600"></i>
-                        </div>
-                        <div class="flex-1">
-                            <h3 class="text-2xl font-bold text-gray-800 mb-4"><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">Mantenimiento Predictivo</a></h3>
-                            <p class="text-gray-600 mb-4">
-                                <a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">Utiliza herramientas de monitoreo para predecir cuándo puede fallar un componente.</a>
-                            </p>
-                            <div class="grid md:grid-cols-2 gap-6">
-                                <div>
-                                    <h4 class="font-semibold text-purple-600 mb-2"><a href="https://google.com" target="_blank" class="hover:text-purple-700 transition">🔍 Herramientas:</a></h4>
-                                    <ul class="text-sm text-gray-600 space-y-1">
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">• Software de monitoreo de temperatura</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">• Análisis de logs del sistema</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">• Herramientas de diagnóstico SMART</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">• Medidores de voltaje</a></li>
-                                    </ul>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-indigo-600 mb-2"><a href="https://google.com" target="_blank" class="hover:text-indigo-700 transition">📊 Monitoreo:</a></h4>
-                                    <ul class="text-sm text-gray-600 space-y-1">
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-indigo-600 transition">• Temperatura de componentes</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-indigo-600 transition">• Velocidad de ventiladores</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-indigo-600 transition">• Estado de la batería</a></li>
-                                        <li><a href="https://google.com" target="_blank" class="hover:text-indigo-600 transition">• Rendimiento del disco</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Tools and Procedures -->
-    <section id="herramientas" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12"><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Herramientas y Procedimientos</a></h2>
-            
-            <!-- Tools Grid -->
-            <div class="mb-12">
-                <h3 class="text-2xl font-semibold text-gray-800 mb-6"><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">🧰 Herramientas Esenciales</a></h3>
-                <div class="grid md:grid-cols-4 gap-6">
-                    <div class="bg-gray-50 p-6 rounded-lg text-center hover:shadow-lg transition">
-                        <i class="fas fa-screwdriver text-3xl text-blue-600 mb-3"></i>
-                        <h4 class="font-semibold mb-2"><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Destornilladores</a></h4>
-                        <p class="text-sm text-gray-600"><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Phillips y planos de diferentes tamaños</a></p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg text-center hover:shadow-lg transition">
-                        <i class="fas fa-hand-paper text-3xl text-yellow-600 mb-3"></i>
-                        <h4 class="font-semibold mb-2"><a href="https://google.com" target="_blank" class="hover:text-yellow-600 transition">Pulsera Antiestática</a></h4>
-                        <p class="text-sm text-gray-600"><a href="https://google.com" target="_blank" class="hover:text-yellow-600 transition">Protección contra descargas eléctricas</a></p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg text-center hover:shadow-lg transition">
-                        <i class="fas fa-tachometer-alt text-3xl text-green-600 mb-3"></i>
-                        <h4 class="font-semibold mb-2"><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">Multímetro</a></h4>
-                        <p class="text-sm text-gray-600"><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">Medición de voltajes y continuidad</a></p>
-                    </div>
-                    <div class="bg-gray-50 p-6 rounded-lg text-center hover:shadow-lg transition">
-                        <i class="fas fa-spray-can text-3xl text-purple-600 mb-3"></i>
-                        <h4 class="font-semibold mb-2"><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">Aire Comprimido</a></h4>
-                        <p class="text-sm text-gray-600"><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">Limpieza de polvo y residuos</a></p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Procedures -->
-            <div>
-                <h3 class="text-2xl font-semibold text-gray-800 mb-6"><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">📋 Procedimientos Paso a Paso</a></h3>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="bg-blue-50 p-6 rounded-lg">
-                        <div class="bg-blue-600 text-white w-8 h-8 rounded-full flex items-center justify-center mb-4 font-bold">1</div>
-                        <h4 class="font-semibold text-blue-800 mb-3"><a href="https://google.com" target="_blank" class="hover:text-blue-900 transition">Limpieza Externa</a></h4>
-                        <ul class="text-sm text-gray-700 space-y-2">
-                            <li><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">• Desconectar todos los cables</a></li>
-                            <li><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">• Limpiar carcasa con paño húmedo</a></li>
-                            <li><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">• Limpiar pantalla con producto específico</a></li>
-                            <li><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">• Secar completamente antes de usar</a></li>
-                        </ul>
-                    </div>
-                    <div class="bg-green-50 p-6 rounded-lg">
-                        <div class="bg-green-600 text-white w-8 h-8 rounded-full flex items-center justify-center mb-4 font-bold">2</div>
-                        <h4 class="font-semibold text-green-800 mb-3"><a href="https://google.com" target="_blank" class="hover:text-green-900 transition">Limpieza Interna</a></h4>
-                        <ul class="text-sm text-gray-700 space-y-2">
-                            <li><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">• Usar pulsera antiestática</a></li>
-                            <li><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">• Abrir carcasa cuidadosamente</a></li>
-                            <li><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">• Limpiar ventiladores con aire comprimido</a></li>
-                            <li><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">• Remover polvo de componentes</a></li>
-                        </ul>
-                    </div>
-                    <div class="bg-purple-50 p-6 rounded-lg">
-                        <div class="bg-purple-600 text-white w-8 h-8 rounded-full flex items-center justify-center mb-4 font-bold">3</div>
-                        <h4 class="font-semibold text-purple-800 mb-3"><a href="https://google.com" target="_blank" class="hover:text-purple-900 transition">Verificación</a></h4>
-                        <ul class="text-sm text-gray-700 space-y-2">
-                            <li><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">• Revisar todas las conexiones</a></li>
-                            <li><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">• Verificar temperaturas de operación</a></li>
-                            <li><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">• Probar funcionamiento completo</a></li>
-                            <li><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">• Documentar el mantenimiento</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Components -->
-    <section id="componentes" class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12"><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Componentes del Computador</a></h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Motherboard -->
-                <div class="component-card bg-white rounded-lg p-6 shadow-lg">
-                    <div class="text-center mb-4">
-                        <i class="fas fa-microchip text-4xl text-blue-600 mb-3"></i>
-                        <h3 class="text-xl font-bold text-gray-800"><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Placa Base</a></h3>
-                    </div>
-                    <p class="text-gray-600 mb-4"><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Conecta todos los componentes del sistema</a></p>
-                    <div class="space-y-2">
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">Revisar capacitores hinchados</a></span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">Limpiar slots de expansión</a></span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-check text-green-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">Verificar conexiones</a></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CPU -->
-                <div class="component-card bg-white rounded-lg p-6 shadow-lg">
-                    <div class="text-center mb-4">
-                        <i class="fas fa-brain text-4xl text-purple-600 mb-3"></i>
-                        <h3 class="text-xl font-bold text-gray-800"><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">Procesador</a></h3>
-                    </div>
-                    <p class="text-gray-600 mb-4"><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">Unidad central de procesamiento</a></p>
-                    <div class="space-y-2">
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-thermometer-half text-red-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-red-600 transition">Monitorear temperatura</a></span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-fan text-blue-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Limpiar disipador</a></span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-paste text-gray-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-gray-600 transition">Renovar pasta térmica</a></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- RAM -->
-                <div class="component-card bg-white rounded-lg p-6 shadow-lg">
-                    <div class="text-center mb-4">
-                        <i class="fas fa-memory text-4xl text-green-600 mb-3"></i>
-                        <h3 class="text-xl font-bold text-gray-800"><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">Memoria RAM</a></h3>
-                    </div>
-                    <p class="text-gray-600 mb-4"><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">Almacenamiento temporal de datos</a></p>
-                    <div class="space-y-2">
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-eraser text-orange-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-orange-600 transition">Limpiar contactos</a></span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-vial text-purple-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">Probar con MemTest</a></span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-exchange-alt text-blue-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Verificar compatibilidad</a></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Storage -->
-                <div class="component-card bg-white rounded-lg p-6 shadow-lg">
-                    <div class="text-center mb-4">
-                        <i class="fas fa-hdd text-4xl text-indigo-600 mb-3"></i>
-                        <h3 class="text-xl font-bold text-gray-800"><a href="https://google.com" target="_blank" class="hover:text-indigo-600 transition">Almacenamiento</a></h3>
-                    </div>
-                    <p class="text-gray-600 mb-4"><a href="https://google.com" target="_blank" class="hover:text-indigo-600 transition">HDD, SSD y unidades ópticas</a></p>
-                    <div class="space-y-2">
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-chart-pie text-blue-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Verificar espacio libre</a></span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-search text-green-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">Escanear sectores dañados</a></span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-compress text-purple-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-purple-600 transition">Desfragmentar disco</a></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Power Supply -->
-                <div class="component-card bg-white rounded-lg p-6 shadow-lg">
-                    <div class="text-center mb-4">
-                        <i class="fas fa-plug text-4xl text-yellow-600 mb-3"></i>
-                        <h3 class="text-xl font-bold text-gray-800"><a href="https://google.com" target="_blank" class="hover:text-yellow-600 transition">Fuente de Poder</a></h3>
-                    </div>
-                    <p class="text-gray-600 mb-4"><a href="https://google.com" target="_blank" class="hover:text-yellow-600 transition">Suministra energía al sistema</a></p>
-                    <div class="space-y-2">
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-bolt text-yellow-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-yellow-600 transition">Medir voltajes</a></span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-fan text-blue-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Limpiar ventilador</a></span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-cable text-gray-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-gray-600 transition">Revisar cables</a></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Graphics -->
-                <div class="component-card bg-white rounded-lg p-6 shadow-lg">
-                    <div class="text-center mb-4">
-                        <i class="fas fa-desktop text-4xl text-red-600 mb-3"></i>
-                        <h3 class="text-xl font-bold text-gray-800"><a href="https://google.com" target="_blank" class="hover:text-red-600 transition">Tarjeta Gráfica</a></h3>
-                    </div>
-                    <p class="text-gray-600 mb-4"><a href="https://google.com" target="_blank" class="hover:text-red-600 transition">Procesamiento de gráficos</a></p>
-                    <div class="space-y-2">
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-thermometer-half text-red-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-red-600 transition">Controlar temperatura</a></span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-download text-blue-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-blue-600 transition">Actualizar drivers</a></span>
-                        </div>
-                        <div class="flex items-center text-sm">
-                            <i class="fas fa-broom text-green-500 mr-2"></i>
-                            <span><a href="https://google.com" target="_blank" class="hover:text-green-600 transition">Limpiar disipadores</a></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Diagnosis -->
-    <section id="diagnostico" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Diagnóstico de Fallas</h2>
-            
+    <section id="herramientas" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-tech-gray">
+                <a href="https://www.google.com" target="_blank" class="link-title text-tech-gray">
+                    Herramientas y Procedimientos
+                </a>
+            </h2>
             <div class="grid lg:grid-cols-2 gap-12">
-                <!-- Common Issues -->
-                <div>
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-6">🚨 Casos Prácticos</h3>
+                <div class="bg-white rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-tech-blue">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-tech-blue">
+                            🔧 Herramientas Esenciales
+                        </a>
+                    </h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+                            <span class="text-2xl">🪛</span>
+                            <a href="https://www.google.com" target="_blank" class="link-title link-tool-item text-gray-700">
+                                Destornilladores
+                            </a>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+                            <span class="text-2xl">⚡</span>
+                            <a href="https://www.google.com" target="_blank" class="link-title link-tool-item text-gray-700">
+                                Pulsera Antiestática
+                            </a>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+                            <span class="text-2xl">📏</span>
+                            <a href="https://www.google.com" target="_blank" class="link-title link-tool-item text-gray-700">
+                                Multímetro
+                            </a>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+                            <span class="text-2xl">🧹</span>
+                            <a href="https://www.google.com" target="_blank" class="link-title link-tool-item text-gray-700">
+                                Kit de Limpieza
+                            </a>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+                            <span class="text-2xl">🔦</span>
+                            <a href="https://www.google.com" target="_blank" class="link-title link-tool-item text-gray-700">
+                                Linterna LED
+                            </a>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
+                            <span class="text-2xl">💾</span>
+                            <a href="https://www.google.com" target="_blank" class="link-title link-tool-item text-gray-700">
+                                USB Booteable
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="procedimientos" class="bg-white rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-tech-blue">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-tech-blue">
+                            📋 Procedimientos Básicos
+                        </a>
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h4 class="font-bold text-green-700">
+                                <a href="https://www.google.com" target="_blank" class="link-title text-green-700">
+                                    1. Preparación
+                                </a>
+                            </h4>
+                            <p class="text-sm text-gray-600">Apagar equipo, desconectar cables, usar pulsera antiestática</p>
+                        </div>
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h4 class="font-bold text-blue-700">
+                                <a href="https://www.google.com" target="_blank" class="link-title text-blue-700">
+                                    2. Limpieza Externa
+                                </a>
+                            </h4>
+                            <p class="text-sm text-gray-600">Limpiar carcasa, pantalla, teclado y puertos</p>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h4 class="font-bold text-purple-700">
+                                <a href="https://www.google.com" target="_blank" class="link-title text-purple-700">
+                                    3. Limpieza Interna
+                                </a>
+                            </h4>
+                            <p class="text-sm text-gray-600">Remover polvo de ventiladores, disipadores y componentes</p>
+                        </div>
+                        <div class="border-l-4 border-orange-500 pl-4">
+                            <h4 class="font-bold text-orange-700">
+                                <a href="https://www.google.com" target="_blank" class="link-title text-orange-700">
+                                    4. Revisión
+                                </a>
+                            </h4>
+                            <p class="text-sm text-gray-600">Verificar conexiones, cables y funcionamiento</p>
+                        </div>
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <h4 class="font-bold text-red-700">
+                                <a href="https://www.google.com" target="_blank" class="link-title text-red-700">
+                                    5. Pruebas
+                                </a>
+                            </h4>
+                            <p class="text-sm text-gray-600">Encender, verificar arranque y ejecutar diagnósticos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="seguridad" class="mt-12 p-8 bg-tech-blue text-white rounded-xl shadow-lg">
+                <h3 class="text-3xl font-bold mb-6">
+                    <a href="https://www.google.com" target="_blank" class="link-title text-white">
+                        ⚡ Seguridad Eléctrica
+                    </a>
+                </h3>
+                <p class="text-lg">El uso correcto de la pulsera antiestática y la manipulación adecuada de la fuente de poder son cruciales para proteger tanto al técnico como al equipo. Asegúrate de desconectar siempre el equipo antes de realizar cualquier intervención interna.</p>
+            </div>
+            <div id="limpieza" class="mt-12 p-8 bg-white rounded-xl shadow-lg border border-gray-200">
+                <h3 class="text-3xl font-bold mb-6 text-tech-gray">
+                    <a href="https://www.google.com" target="_blank" class="link-title text-tech-gray">
+                        🧹 Técnicas de Limpieza
+                    </a>
+                </h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-blue-700 mb-2">
+                            <a href="https://www.google.com" target="_blank" class="link-title text-blue-700">
+                                Limpieza Interna
+                            </a>
+                        </h4>
+                        <p class="text-gray-700 mb-4">Utiliza aire comprimido para remover polvo de la placa base y disipadores. Limpia los ventiladores con cuidado. Evita el contacto directo con componentes sensibles.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-green-700 mb-2">
+                            <a href="https://www.google.com" target="_blank" class="link-title text-green-700">
+                                Limpieza Externa
+                            </a>
+                        </h4>
+                        <p class="text-gray-700 mb-4">Usa paños de microfibra y soluciones especializadas para limpiar pantallas, teclados y carcasas. Mantén los puertos libres de suciedad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="componentes" class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-tech-gray">
+                <a href="https://www.google.com" target="_blank" class="link-title text-tech-gray">
+                    Componentes del Computador
+                </a>
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div id="placa-base" class="card-hover bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-6 border border-indigo-200 interactive-component">
+                    <div class="text-center mb-4">
+                        <svg class="w-12 h-12 mx-auto text-indigo-600 mb-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M4 4h16v16H4V4zm2 2v12h12V6H6zm2 2h8v8H8V8zm2 2v4h4v-4h-4z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-indigo-700">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-indigo-700 card-link-title">
+                            Placa Base
+                        </a>
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-3">Componente principal que conecta todos los elementos del sistema.</p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Revisar capacitores hinchados
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Limpiar slots de expansión
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Verificar conexiones
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="procesador" class="card-hover bg-gradient-to-br from-red-50 to-red-100 rounded-xl p-6 border border-red-200 interactive-component">
+                    <div class="text-center mb-4">
+                        <svg class="w-12 h-12 mx-auto text-red-600 mb-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 7h6v10H9V7zm-4-4h2v2H5V3zm0 4h2v2H5V7zm0 4h2v2H5v-2zm0 4h2v2H5v-2zm0 4h2v2H5v-2zm14-16h2v2h-2V3zm0 4h2v2h-2V7zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2zm0 4h2v2h-2v-2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-red-700">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-red-700 card-link-title">
+                            Procesador (CPU)
+                        </a>
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-3">Cerebro del computador que ejecuta las instrucciones.</p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Limpiar disipador de calor
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Renovar pasta térmica
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Verificar ventilador
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="memoria" class="card-hover bg-gradient-to-br from-green-50 to-green-100 rounded-xl p-6 border border-green-200 interactive-component">
+                    <div class="text-center mb-4">
+                        <svg class="w-12 h-12 mx-auto text-green-600 mb-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6 2v6h.01L6 8.01 10 12l-4 4 .01.01H6V22h12v-5.99h.01L18 16.01 14 12l4-4-.01-.01H18V2H6zm2 2h8v2H8V4zm0 4h8v8H8V8z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-green-700">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-green-700 card-link-title">
+                            Memoria RAM
+                        </a>
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-3">Almacenamiento temporal de datos en uso por el sistema.</p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Limpiar contactos dorados
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Verificar instalación correcta
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Probar con software
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="almacenamiento" class="card-hover bg-gradient-to-br from-purple-50 to-purple-100 rounded-xl p-6 border border-purple-200 interactive-component">
+                    <div class="text-center mb-4">
+                        <svg class="w-12 h-12 mx-auto text-purple-600 mb-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M6 2c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 2 2h16c1.1 0 2-.9 2-2V8l-6-6H6zm7 7V3.5L18.5 9H13z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-purple-700">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-purple-700 card-link-title">
+                            Disco Duro
+                        </a>
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-3">Dispositivo de almacenamiento permanente de datos.</p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Verificar cables SATA/IDE
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Desfragmentar (HDD)
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Monitorear salud del disco
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div id="fuente-poder" class="card-hover bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-xl p-6 border border-yellow-200 interactive-component">
+                    <div class="text-center mb-4">
+                        <svg class="w-12 h-12 mx-auto text-yellow-600 mb-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14.69 2.21L4.33 11.49c-.64.58-.28 1.65.58 1.73L8 13.5l1.04 4.6c.14.64.84.84 1.33.38l9.36-8.28c.64-.58.28-1.65-.58-1.73L16 8.5l-1.04-4.6c-.14-.64-.84-.84-1.33-.38z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-yellow-700">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-yellow-700 card-link-title">
+                            Fuente de Poder
+                        </a>
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-3">Suministra energía eléctrica a todos los componentes.</p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Limpiar ventilador interno
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Verificar voltajes
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Revisar cables de alimentación
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-hover bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl p-6 border border-cyan-200 interactive-component">
+                    <div class="text-center mb-4">
+                        <svg class="w-12 h-12 mx-auto text-cyan-600 mb-3" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18-.21 0-.41-.06-.57-.18l-7.9-4.44A.991.991 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18.21 0 .41.06.57.18l7.9 4.44c.32.17.53.5.53.88v9z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 text-cyan-700">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-cyan-700 card-link-title">
+                            Tarjeta Gráfica
+                        </a>
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-3">Procesa y renderiza imágenes y videos.</p>
+                    <ul class="text-xs text-gray-500 space-y-1">
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Limpiar ventiladores
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Verificar conexión PCIe
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-gray-500 link-list-item">
+                                • Actualizar drivers
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="diagnostico" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-tech-gray">
+                <a href="https://www.google.com" target="_blank" class="link-title text-tech-gray">
+                    Diagnóstico de Fallas
+                </a>
+            </h2>
+            <div class="grid lg:grid-cols-2 gap-12">
+                <div id="casos-practicos" class="bg-white rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-tech-blue">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-tech-blue">
+                            🔍 Casos Prácticos y Solución de Problemas
+                        </a>
+                    </h3>
                     <div class="space-y-6">
-                        <div class="border-l-4 border-red-500 pl-6 py-4 bg-red-50 rounded-r-lg">
-                            <h4 class="font-bold text-red-800 mb-2">Fallo de Arranque</h4>
-                            <p class="text-sm text-gray-700 mb-3">El equipo no enciende o se reinicia constantemente</p>
-                            <div class="text-sm text-gray-600">
-                                <strong>Posibles causas:</strong> Fuente de poder, RAM defectuosa, sobrecalentamiento
+                        <div id="fallas-comunes" class="border border-red-200 rounded-lg p-4 bg-red-50">
+                            <h4 class="font-bold text-red-700 mb-2">
+                                <a href="https://www.google.com" target="_blank" class="link-title text-red-700">
+                                    ❌ Fallo de Arranque
+                                </a>
+                            </h4>
+                            <p class="text-sm text-gray-700 mb-2">El equipo no enciende o no muestra imagen</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                        • Verificar conexión eléctrica
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                        • Revisar fuente de poder
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                        • Comprobar memoria RAM
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                        • Verificar conexiones internas
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="mt-4 bg-gray-100 p-4 rounded-lg text-sm text-gray-700 italic">
+                                [Tutorial sugerido: Diagrama de flujo para diagnosticar fallo de arranque.]
                             </div>
                         </div>
-                        
-                        <div class="border-l-4 border-blue-500 pl-6 py-4 bg-blue-50 rounded-r-lg">
-                            <h4 class="font-bold text-blue-800 mb-2">Pantalla Azul (BSOD)</h4>
-                            <p class="text-sm text-gray-700 mb-3">Errores críticos del sistema operativo</p>
-                            <div class="text-sm text-gray-600">
-                                <strong>Posibles causas:</strong> Drivers incompatibles, memoria RAM, disco duro
+
+                        <div class="border border-blue-200 rounded-lg p-4 bg-blue-50">
+                            <h4 class="font-bold text-blue-700 mb-2">
+                                <a href="https://www.google.com" target="_blank" class="link-title text-blue-700">
+                                    💙 Pantalla Azul (BSOD)
+                                </a>
+                            </h4>
+                            <p class="text-sm text-gray-700 mb-2">Error crítico del sistema operativo</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                        • Anotar código de error
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                        • Verificar drivers recientes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                        • Probar memoria RAM
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                        • Revisar temperatura del CPU
+                                    </a>
+                                </li>
+                            </ul>
+                            <div class="mt-4 bg-gray-100 p-4 rounded-lg text-sm text-gray-700 italic">
+                                [Tutorial sugerido: Video explicativo sobre interpretación de códigos BSOD y solución de drivers.]
                             </div>
                         </div>
-                        
-                        <div class="border-l-4 border-orange-500 pl-6 py-4 bg-orange-50 rounded-r-lg">
-                            <h4 class="font-bold text-orange-800 mb-2">Sobrecalentamiento</h4>
-                            <p class="text-sm text-gray-700 mb-3">Temperaturas elevadas que afectan el rendimiento</p>
-                            <div class="text-sm text-gray-600">
-                                <strong>Posibles causas:</strong> Ventiladores sucios, pasta térmica seca, obstrucciones
-                            </div>
+
+                        <div class="border border-orange-200 rounded-lg p-4 bg-orange-50">
+                            <h4 class="font-bold text-orange-700 mb-2">
+                                <a href="https://www.google.com" target="_blank" class="link-title text-orange-700">
+                                    🌡️ Sobrecalentamiento
+                                </a>
+                            </h4>
+                            <p class="text-sm text-gray-700 mb-2">El equipo se apaga por alta temperatura</p>
+                            <ul class="text-xs text-gray-600 space-y-1">
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                        • Limpiar ventiladores
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                        • Renovar pasta térmica
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                        • Verificar flujo de aire
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-600 link-list-item">
+                                        • Monitorear temperaturas
+                                    </a>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
 
-                <!-- Diagnostic Tools -->
-                <div>
-                    <h3 class="text-2xl font-semibold text-gray-800 mb-6">🔧 Herramientas de Diagnóstico</h3>
+                <div id="software-diagnostico" class="bg-white rounded-xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold mb-6 text-tech-blue">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-tech-blue">
+                            💻 Software de Diagnóstico
+                        </a>
+                    </h3>
                     <div class="space-y-4">
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <div class="flex items-center mb-2">
-                                <i class="fas fa-laptop-code text-blue-600 mr-3"></i>
-                                <h4 class="font-semibold">Software Especializado</h4>
+                        <div class="flex items-center space-x-4 p-4 bg-gradient-to-r from-blue-50 to-blue-100 rounded-lg">
+                            <div class="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center">
+                                <span class="text-white font-bold">HW</span>
                             </div>
-                            <ul class="text-sm text-gray-600 ml-6 space-y-1">
-                                <li>• CPU-Z: Información del sistema</li>
-                                <li>• MemTest86: Pruebas de memoria</li>
-                                <li>• CrystalDiskInfo: Estado del disco</li>
-                                <li>• HWiNFO: Monitoreo completo</li>
+                            <div>
+                                <h4 class="font-bold text-blue-700">
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-blue-700">
+                                        HWiNFO64
+                                    </a>
+                                </h4>
+                                <p class="text-sm text-gray-600">Información detallada del hardware</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4 p-4 bg-gradient-to-r from-green-50 to-green-100 rounded-lg">
+                            <div class="w-12 h-12 bg-green-500 rounded-lg flex items-center justify-center">
+                                <span class="text-white font-bold">MT</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-green-700">
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-green-700">
+                                        MemTest86
+                                    </a>
+                                </h4>
+                                <p class="text-sm text-gray-600">Prueba exhaustiva de memoria RAM</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4 p-4 bg-gradient-to-r from-purple-50 to-purple-100 rounded-lg">
+                            <div class="w-12 h-12 bg-purple-500 rounded-lg flex items-center justify-center">
+                                <span class="text-white font-bold">CD</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-purple-700">
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-purple-700">
+                                        CrystalDiskInfo
+                                    </a>
+                                </h4>
+                                <p class="text-sm text-gray-600">Estado de salud de discos duros</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center space-x-4 p-4 bg-gradient-to-r from-red-50 to-red-100 rounded-lg">
+                            <div class="w-12 h-12 bg-red-500 rounded-lg flex items-center justify-center">
+                                <span class="text-white font-bold">ST</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-red-700">
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-red-700">
+                                        Stress Test
+                                    </a>
+                                </h4>
+                                <p class="text-sm text-gray-600">Pruebas de estabilidad del sistema</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="bios-uefi" class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                        <h4 class="font-bold text-yellow-700 mb-2">
+                            <a href="https://www.google.com" target="_blank" class="link-title text-yellow-700">
+                                ⚙️ BIOS/UEFI
+                            </a>
+                        </h4>
+                        <p class="text-sm text-gray-700">Accede al BIOS para configuraciones avanzadas y diagnósticos de hardware básicos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12 text-tech-gray">
+                <a href="https://www.google.com" target="_blank" class="link-title text-tech-gray">
+                    Tendencias y Buenas Prácticas
+                </a>
+            </h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-xl p-8 border border-indigo-200">
+                    <h3 class="text-2xl font-bold mb-6 text-indigo-700">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-indigo-700">
+                            💻 Portátiles vs Escritorio
+                        </a>
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-bold text-indigo-600 mb-2">
+                                <a href="https://www.google.com" target="_blank" class="link-title text-indigo-600">
+                                    Portátiles:
+                                </a>
+                            </h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-700 link-list-item">
+                                        • Limpieza más delicada
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-700 link-list-item">
+                                        • Acceso limitado a componentes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-700 link-list-item">
+                                        • Mayor riesgo de sobrecalentamiento
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-700 link-list-item">
+                                        • Batería requiere cuidado especial
+                                    </a>
+                                </li>
                             </ul>
                         </div>
-                        
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <div class="flex items-center mb-2">
-                                <i class="fas fa-cogs text-green-600 mr-3"></i>
-                                <h4 class="font-semibold">BIOS/UEFI</h4>
-                            </div>
-                            <ul class="text-sm text-gray-600 ml-6 space-y-1">
-                                <li>• Verificar temperaturas</li>
-                                <li>• Probar componentes</li>
-                                <li>• Configurar arranque</li>
-                                <li>• Actualizar firmware</li>
+                        <div>
+                            <h4 class="font-bold text-indigo-600 mb-2">
+                                <a href="https://www.google.com" target="_blank" class="link-title text-indigo-600">
+                                    Escritorio:
+                                </a>
+                            </h4>
+                            <ul class="text-sm text-gray-700 space-y-1">
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-700 link-list-item">
+                                        • Fácil acceso a componentes
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-700 link-list-item">
+                                        • Mejor ventilación
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-700 link-list-item">
+                                        • Componentes intercambiables
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-gray-700 link-list-item">
+                                        • Mantenimiento más sencillo
+                                    </a>
+                                </li>
                             </ul>
                         </div>
-                        
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <div class="flex items-center mb-2">
-                                <i class="fas fa-stethoscope text-purple-600 mr-3"></i>
-                                <h4 class="font-semibold">Diagnóstico Físico</h4>
+                    </div>
+                </div>
+
+                <div id="tendencias" class="bg-gradient-to-br from-cyan-50 to-cyan-100 rounded-xl p-8 border border-cyan-200">
+                    <h3 class="text-2xl font-bold mb-6 text-cyan-700">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-cyan-700">
+                            🚀 Nuevas Tecnologías
+                        </a>
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center space-x-3 p-3 bg-white rounded-lg">
+                            <span class="text-2xl">💾</span>
+                            <div>
+                                <h4 class="font-bold text-cyan-600">
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-cyan-600">
+                                        SSD vs HDD
+                                    </a>
+                                </h4>
+                                <p class="text-xs text-gray-600">Los SSD requieren menos mantenimiento</p>
                             </div>
-                            <ul class="text-sm text-gray-600 ml-6 space-y-1">
-                                <li>• Inspección visual</li>
-                                <li>• Pruebas con multímetro</li>
-                                <li>• Verificación de conexiones</li>
-                                <li>• Análisis de ruidos</li>
-                            </ul>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 bg-white rounded-lg">
+                            <span class="text-2xl">⚙️</span>
+                            <div>
+                                <h4 class="font-bold text-cyan-600">
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-cyan-600">
+                                        UEFI vs BIOS
+                                    </a>
+                                </h4>
+                                <p class="text-xs text-gray-600">Interfaz más moderna y funcional</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 bg-white rounded-lg">
+                            <span class="text-2xl">🔌</span>
+                            <div>
+                                <h4 class="font-bold text-cyan-600">
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-cyan-600">
+                                        USB-C y Thunderbolt
+                                    </a>
+                                </h4>
+                                <p class="text-xs text-gray-600">Nuevos estándares de conectividad</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center space-x-3 p-3 bg-white rounded-lg">
+                            <span class="text-2xl">☁️</span>
+                            <div>
+                                <h4 class="font-bold text-cyan-600">
+                                    <a href="https://www.google.com" target="_blank" class="link-title text-cyan-600">
+                                        Diagnóstico Remoto
+                                    </a>
+                                </h4>
+                                <p class="text-xs text-gray-600">Herramientas de monitoreo en la nube</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -554,256 +1003,332 @@
         </div>
     </section>
 
-    <!-- Trends and Best Practices -->
-    <section class="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-12">Tendencias y Buenas Prácticas</h2>
-            
-            <div class="grid md:grid-cols-2 gap-12">
-                <div>
-                    <h3 class="text-2xl font-semibold mb-6">💻 Portátiles vs Escritorio</h3>
-                    <div class="space-y-4">
-                        <div class="bg-white bg-opacity-20 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">Laptops</h4>
-                            <ul class="text-sm space-y-1">
-                                <li>• Limpieza más delicada</li>
-                                <li>• Acceso limitado a componentes</li>
-                                <li>• Mayor riesgo de sobrecalentamiento</li>
-                                <li>• Batería requiere cuidado especial</li>
-                            </ul>
-                        </div>
-                        <div class="bg-white bg-opacity-20 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">Escritorio</h4>
-                            <ul class="text-sm space-y-1">
-                                <li>• Fácil acceso a componentes</li>
-                                <li>• Mejor ventilación</li>
-                                <li>• Componentes intercambiables</li>
-                                <li>• Mantenimiento más sencillo</li>
-                            </ul>
-                        </div>
-                    </div>
+    <section id="recursos" class="py-16 bg-gradient-to-br from-tech-blue to-blue-600 text-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold text-center mb-12">
+                <a href="https://www.google.com" target="_blank" class="link-title text-white">
+                    Recursos Adicionales
+                </a>
+            </h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div id="enlaces" class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                    <h3 class="text-xl font-bold mb-4">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-white">
+                            🔗 Enlaces Útiles
+                        </a>
+                    </h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-white hover:text-blue-200 transition-colors link-list-item">
+                                • Manual de Reparación PC
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-white hover:text-blue-200 transition-colors link-list-item">
+                                • Guías de Diagnóstico
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-white hover:text-blue-200 transition-colors link-list-item">
+                                • Foros de Soporte Técnico
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-white hover:text-blue-200 transition-colors link-list-item">
+                                • Catálogos de Componentes
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-                
-                <div>
-                    <h3 class="text-2xl font-semibold mb-6">🚀 Nuevas Tecnologías</h3>
-                    <div class="space-y-4">
-                        <div class="bg-white bg-opacity-20 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">SSD vs HDD</h4>
-                            <p class="text-sm">Los discos sólidos requieren menos mantenimiento pero necesitan monitoreo de ciclos de escritura</p>
-                        </div>
-                        <div class="bg-white bg-opacity-20 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">UEFI/BIOS</h4>
-                            <p class="text-sm">Interfaces más avanzadas con mejores herramientas de diagnóstico integradas</p>
-                        </div>
-                        <div class="bg-white bg-opacity-20 p-4 rounded-lg">
-                            <h4 class="font-semibold mb-2">Software de Optimización</h4>
-                            <p class="text-sm">Herramientas automáticas para limpieza y optimización del sistema</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Resources -->
-    <section id="recursos" class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Recursos Adicionales</h2>
-            
-            <div class="grid md:grid-cols-3 gap-8 mb-12">
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                    <i class="fas fa-book text-4xl text-blue-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Bibliografía</h3>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li>• Montaje y mantenimiento de equipos</li>
-                        <li>• Manual técnico SENA</li>
-                        <li>• Guías de fabricantes</li>
+                <div id="biblioteca" class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                    <h3 class="text-xl font-bold mb-4">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-white">
+                            📚 Bibliografía
+                        </a>
+                    </h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-white link-list-item">
+                                • "Montaje y Mantenimiento de Equipos"
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-white link-list-item">
+                                • "Hardware: Curso Práctico"
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-white link-list-item">
+                                • "Reparación de PC Paso a Paso"
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-white link-list-item">
+                                • "Diagnóstico de Fallas en PC"
+                            </a>
+                        </li>
                     </ul>
                 </div>
-                
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                    <i class="fas fa-video text-4xl text-red-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Videos Tutoriales</h3>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li>• Canal YouTube SENA</li>
-                        <li>• Tutoriales especializados</li>
-                        <li>• Casos prácticos resueltos</li>
-                    </ul>
-                </div>
-                
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                    <i class="fas fa-link text-4xl text-green-600 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-3">Enlaces Útiles</h3>
-                    <ul class="text-sm text-gray-600 space-y-2">
-                        <li>• Sitios web de fabricantes</li>
-                        <li>• Foros técnicos especializados</li>
-                        <li>• Bases de datos de drivers</li>
+
+                <div id="videos" class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                    <h3 class="text-xl font-bold mb-4">
+                        <a href="https://www.google.com" target="_blank" class="link-title text-white">
+                            🎥 Videos Educativos
+                        </a>
+                    </h3>
+                    <ul class="space-y-2 text-sm">
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-white link-list-item">
+                                • Ensamble de PC desde Cero
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-white link-list-item">
+                                • Técnicas de Limpieza
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-white link-list-item">
+                                • Diagnóstico de Fallas
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.google.com" target="_blank" class="link-title text-white link-list-item">
+                                • Instalación de Componentes
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
-            
-            <!-- Download Section -->
-            <div class="bg-white p-8 rounded-lg shadow-lg text-center">
-                <i class="fas fa-file-pdf text-5xl text-red-600 mb-4"></i>
-                <h3 class="text-2xl font-bold text-gray-800 mb-4">Guía Completa de Mantenimiento</h3>
-                <p class="text-gray-600 mb-6">
-                    Descarga nuestra guía completa en PDF con todos los procedimientos, 
-                    listas de verificación y casos prácticos para tu formación técnica.
-                </p>
-                <button onclick="downloadPDF()" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
-                    <i class="fas fa-download mr-2"></i>Descargar Guía PDF
+
+            <div id="descargas" class="text-center mt-12">
+                <button onclick="descargarGuia()" class="bg-white text-tech-blue px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-50 transition-all transform hover:scale-105 shadow-lg">
+                    📄 Descargar Guía PDF del Curso
                 </button>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <i class="fas fa-microchip text-2xl text-blue-400"></i>
-                        <span class="text-xl font-bold">TecnoMaintenance</span>
-                    </div>
-                    <p class="text-gray-400 text-sm">
-                        Plataforma educativa especializada en mantenimiento de equipos de cómputo para estudiantes técnicos.
-                    </p>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Contenido</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#tipos" class="hover:text-white transition">Tipos de Mantenimiento</a></li>
-                        <li><a href="#herramientas" class="hover:text-white transition">Herramientas</a></li>
-                        <li><a href="#componentes" class="hover:text-white transition">Componentes</a></li>
-                        <li><a href="#diagnostico" class="hover:text-white transition">Diagnóstico</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">SENA</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li>Técnico en Sistemas</li>
-                        <li>Media Técnica</li>
-                        <li>Formación Complementaria</li>
-                        <li>Recursos Educativos</li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold mb-4">Contacto</h4>
-                    <div class="space-y-2 text-sm text-gray-400">
-                        <div class="flex items-center">
-                            <i class="fas fa-envelope mr-2"></i>
-                            <span>info@tecnomaintenance.edu</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-phone mr-2"></i>
-                            <span>+57 (1) 234-5678</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt mr-2"></i>
-                            <span>SENA - Colombia</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2024 TecnoMaintenance - Material Educativo SENA. Todos los derechos reservados.</p>
-            </div>
+    <footer class="bg-tech-gray text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="mb-4">© 2024 Mantenimiento de Equipos de Cómputo - Material Educativo</p>
+            <p class="text-sm text-gray-400">Diseñado para estudiantes de formación técnica • SENA y instituciones afines</p>
         </div>
     </footer>
 
+    <div id="back-to-top" class="cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </div>
+
     <script>
-        // Smooth scrolling function
-        function scrollToSection(sectionId) {
-            document.getElementById(sectionId).scrollIntoView({
+        // Smooth scrolling para navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Lógica del botón de regreso al inicio
+        const backToTopButton = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            // Mostrar u ocultar el botón dependiendo del desplazamiento
+            if (window.scrollY > 300) { // Mostrar el botón después de 300px de desplazamiento
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+
+            // Destacar sección activa en navegación
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                // Ajuste para que la sección se considere activa cuando esté cerca del inicio de la ventana
+                if (scrollY >= (sectionTop - 100)) { 
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                // Eliminar el resaltado de todos los enlaces primero
+                link.classList.remove('text-tech-blue', 'font-bold');
+                link.classList.add('text-tech-gray');
+
+                // Resaltar el enlace que corresponde a la sección activa
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.remove('text-tech-gray');
+                    link.classList.add('text-tech-blue', 'font-bold');
+                }
+            });
+        });
+
+        // Desplazamiento suave al hacer clic en el botón de regreso al inicio
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
                 behavior: 'smooth'
             });
-        }
+        });
 
-        // Mobile menu toggle
-        function toggleMenu() {
-            // Simple mobile menu implementation
-            alert('Menú móvil - Funcionalidad disponible en versión completa');
-        }
-
-        // PDF Download function
-        function downloadPDF() {
-            // Create a sample PDF content
-            const pdfContent = `
+        // Función para simular descarga de PDF (Actualizado para reflejar la guía sugerida)
+        function descargarGuia() {
+            // Crear contenido del PDF simulado
+            const contenidoPDF = `
 GUÍA DE MANTENIMIENTO DE EQUIPOS DE CÓMPUTO
-SENA - Técnico en Sistemas Teleinformáticos
+(Material Complementario para Instructores y Estudiantes Técnicos)
 
-CONTENIDO:
-1. Introducción al Mantenimiento
-2. Tipos de Mantenimiento (Preventivo, Correctivo, Predictivo)
-3. Herramientas Esenciales
-4. Procedimientos Paso a Paso
-5. Componentes del Computador
-6. Diagnóstico de Fallas
-7. Casos Prácticos
-8. Buenas Prácticas
-9. Nuevas Tecnologías
-10. Recursos Adicionales
+1. TIPOS DE MANTENIMIENTO
+   - Preventivo: Acciones programadas para evitar fallas.
+   - Correctivo: Reparación de fallas ya ocurridas.
+   - Predictivo: Monitoreo y predicción de fallas futuras.
 
-Esta guía ha sido desarrollada como material educativo para estudiantes de formación técnica en el área de sistemas e informática.
+2. HERRAMIENTAS ESENCIALES Y SEGURIDAD
+   - Destornilladores, Multímetro, Kit de limpieza.
+   - Uso de Pulsera Antiestática y Seguridad Eléctrica.
 
-© 2024 - Material Educativo SENA
+3. PROCEDIMIENTOS BÁSICOS
+   - Preparación, Limpieza externa e interna, Revisión, Pruebas.
+   - Técnicas de limpieza específicas para ventiladores y componentes sensibles.
+
+4. COMPONENTES PRINCIPALES Y MANTENIMIENTO
+   - Placa base (revisión de capacitores)
+   - Procesador (renovación de pasta térmica)
+   - Memoria RAM (limpieza de contactos)
+   - Disco duro (monitoreo de salud)
+   - Fuente de poder (revisión de voltajes)
+   - Tarjeta Gráfica (actualización de drivers)
+
+5. DIAGNÓSTICO DE FALLAS Y CASOS PRÁCTICOS
+   - Fallo de arranque, Pantalla azul (BSOD), Sobrecalentamiento.
+   - Software especializado: HWiNFO64, MemTest86, CrystalDiskInfo.
+   - Uso de BIOS/UEFI para diagnóstico.
+
+6. TENDENCIAS
+   - Diferencias en el mantenimiento de Portátiles vs. Escritorio.
+   - Nuevas tecnologías como SSD, UEFI y Diagnóstico Remoto.
+
+Material educativo diseñado para la formación técnica del SENA.
             `;
 
-            // Create and download the file
-            const blob = new Blob([pdfContent], { type: 'text/plain' });
+            // Crear y descargar archivo
+            const blob = new Blob([contenidoPDF], { type: 'text/plain' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'Guia_Mantenimiento_Equipos_Computo_SENA.txt';
+            a.download = 'Guia_Mantenimiento_Equipos_Computo.txt';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             window.URL.revokeObjectURL(url);
 
-            // Show success message
-            alert('¡Descarga iniciada! La guía se ha descargado como archivo de texto. En un entorno real, esto sería un PDF completo con diagramas e imágenes.');
+            // Mostrar mensaje de confirmación
+            alert('¡Guía descargada exitosamente! 📄\n\nLa guía contiene todo el contenido del curso organizado para tu estudio.');
         }
 
-        // Add scroll effect to navigation
-        window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.classList.add('bg-opacity-95');
-            } else {
-                nav.classList.remove('bg-opacity-95');
-            }
-        });
-
-        // Add animation on scroll for cards
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
+        // Animación de entrada para las tarjetas
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.style.opacity = '1';
                     entry.target.style.transform = 'translateY(0)';
                 }
             });
-        }, observerOptions);
+        }, { threshold: 0.1 });
 
-        // Observe all cards
-        document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.tech-card, .component-card');
-            cards.forEach(card => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                observer.observe(card);
-            });
+        // Aplicar animación a las tarjetas
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
         });
+        
+        // Configuración del menú (se mantiene la función para gestión dinámica)
+        const menuConfig = {
+            "Tipos de Mantenimiento": [
+                { text: "📋 Visión General", href: "#tipos" },
+                { text: "✅ Mantenimiento Preventivo", href: "#preventivo" },
+                { text: "🔧 Mantenimiento Correctivo", href: "#correctivo" },
+                { text: "📊 Mantenimiento Predictivo", href: "#predictivo" }
+            ],
+            "Herramientas": [
+                { text: "🔧 Herramientas Básicas", href: "#herramientas" },
+                { text: "📋 Procedimientos", href: "#procedimientos" },
+                { text: "⚡ Seguridad Eléctrica", href: "#seguridad" },
+                { text: "🧹 Técnicas de Limpieza", href: "#limpieza" }
+            ],
+            "Componentes": [
+                { text: "💻 Visión General", href: "#componentes" },
+                { text: "🔲 Placa Base", href: "#placa-base" },
+                { text: "🧠 Procesador", href: "#procesador" },
+                { text: "💾 Memoria RAM", href: "#memoria" },
+                { text: "💿 Almacenamiento", href: "#almacenamiento" },
+                { text: "⚡ Fuente de Poder", href: "#fuente-poder" }
+            ],
+            "Diagnóstico": [
+                { text: "🔍 Métodos de Diagnóstico", href: "#diagnostico" },
+                { text: "❌ Fallas Comunes", href: "#fallas-comunes" },
+                { text: "💻 Software Especializado", href: "#software-diagnostico" },
+                { text: "⚙️ BIOS/UEFI", href: "#bios-uefi" },
+                { text: "📚 Casos Prácticos", href: "#casos-practicos" },
+                { text: "Explorar Diagnóstico de Fallas", href: "#diagnostico", special: true }
+            ],
+            "Recursos": [
+                { text: "📚 Biblioteca", href: "#recursos" },
+                { text: "📄 Descargas", href: "#descargas" },
+                { text: "🎥 Videos Tutoriales", href: "#videos" },
+                { text: "🔗 Enlaces Útiles", href: "#enlaces" },
+                { text: "🚀 Nuevas Tecnologías", href: "#tendencias" }
+            ]
+        };
+
+        // Función para agregar nuevo elemento al menú
+        function agregarElementoMenu(categoria, texto, enlace) {
+            if (menuConfig[categoria]) {
+                menuConfig[categoria].push({ text: texto, href: enlace });
+                actualizarMenu();
+                console.log(`✅ Elemento "${texto}" agregado a "${categoria}"`);
+            } else {
+                console.log(`❌ Categoría "${categoria}" no encontrada`);
+            }
+        }
+
+        // Función para crear nueva categoría de menú
+        function crearCategoriaMenu(nombreCategoria, elementos = []) {
+            menuConfig[nombreCategoria] = elementos;
+            actualizarMenu();
+            console.log(`✅ Nueva categoría "${nombreCategoria}" creada`);
+        }
+
+        // Función para actualizar el menú dinámicamente
+        function actualizarMenu() {
+            // Esta función se puede usar para regenerar el menú desde la configuración
+            console.log("🔄 Configuración del menú actualizada:", menuConfig);
+        }
+
+        // Función para mostrar configuración actual del menú
+        function mostrarConfiguracionMenu() {
+            console.log("📋 Configuración actual del menú:");
+            Object.keys(menuConfig).forEach(categoria => {
+                console.log(`\n${categoria}:`);
+                menuConfig[categoria].forEach(item => {
+                    console.log(`  - ${item.text} → ${item.href}`);
+                });
+            });
+        }
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'961ee46ba6c2f7b4',t:'MTc1Mjk3NzExMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
